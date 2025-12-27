@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact – Website Showcase</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Global styles -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Contact specific styles -->
+  <link rel="stylesheet" href="contact.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="contact-page">
+
+  <!-- BACK TO TOP -->
+  <button id="backToTop">↑ Top</button>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <input type="text" class="glass-input" placeholder="Search...">
+    <ul>
+      <li><a href="index.html" class="glass-btn">Home</a></li>
+      <li><a href="#" class="glass-btn">Hi Twin</a></li>
+      <li><a href="#" class="glass-btn">About me</a></li>
+      <li><a href="contact.html" class="glass-btn">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- CONTACT SECTION -->
+  <section class="section contact-section">
+    <h2 class="title">Contact Me</h2>
+
+    <div class="contact-wrapper">
+      <form class="contact-form">
+        <label for="naam">Name</label>
+        <input type="text" id="naam" placeholder="Your Name" required>
+
+        <label for="email">E-mail</label>
+        <input type="email" id="email" placeholder="Your Email" required>
+
+        <label for="bericht">Message</label>
+        <textarea id="bericht" placeholder="Write your message..." rows="5" required></textarea>
+
+        <button type="submit" class="contact-btn">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">
+      <img src="assets/images/Logo.png" alt="Logo">
+    </div>
+
+    <div class="footer-links">
+      <a href="index.html" class="glass-btn">Home</a>
+      <a href="#" class="glass-btn">Purrpurr</a>
+      <a href="#" class="glass-btn">About me</a>
+      <a href="contact.html" class="glass-btn">Contact</a>
+    </div>
+
+    <div class="footer-bottom">
+      &copy; 2025 Placeholder
+    </div>
+  </footer>
+
+  <!-- BACKGROUND MUSIC -->
+  <audio id="bgMusic" preload="auto">
+    <source src="assets/audio/Seaside.mp4" type="audio/mpeg">
+  </audio>
+
+  <button id="musicToggle" aria-label="Toggle music">⏸</button>
+
+  <!-- SCRIPT -->
+  <script src="Js/script.js"></script>
+
+  <!-- Contact Form Script -->
+  <script>
+document.querySelector(".contact-form").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const formData = {
+    naam: document.getElementById("naam").value,
+    email: document.getElementById("email").value,
+    bericht: document.getElementById("bericht").value,
+  };
+
+  try {
+    const response = await fetch("https://script.google.com/macros/s/AKfycbycq831tp6ZNR-EMZKA3A9OJmsBbIGnmthUkENBGtIDOmsJe0Cn7RvtiZOk8qS1qcrarA/exec", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData)
+    });
+
+    const result = await response.json(); // parse the JSON returned by Apps Script
+    if(result.result === "success") {
+      alert("Bericht verzonden!");
+      this.reset();
+    } else {
+      alert("Error: " + result.message);
+    }
+
+  } catch(err) {
+    console.error(err);
+    alert("Fout bij verzenden: " + err.message);
+  }
+});
+
+
+
+    // Alleen voor contactpagina
+if(document.body.classList.contains("contact-page")){
+    const modal = document.getElementById("keyboardModal");
+    if(modal){
+        modal.style.display = "flex";
+        // Modal automatisch na 4 seconden weer verbergen
+        setTimeout(() => { modal.style.display = "none"; }, 4000);
+    }
+}
+
+  </script>
+
+</body>
+</html>

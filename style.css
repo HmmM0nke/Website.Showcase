@@ -1,0 +1,587 @@
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: Inter, sans-serif; background: white; color: black; }
+
+#after-hero {
+  height: 1px;
+}
+
+.hero-banner.interactive-hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, #1e1e36, #0f2d5c);
+  overflow: hidden;
+  isolation: isolate;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Canvas */
+#heroCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+
+/* Content */
+.hero-content-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* TITELS */
+.hero-title,
+.hero-subtitle {
+  font-size: 6vw;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin: 0;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.hero-title {
+  color: rgb(170,170,170);
+}
+
+.hero-subtitle {
+  color: transparent;
+  -webkit-text-stroke: 1px rgb(170,170,170);
+}
+
+/* BUTTON */
+.start-btn {
+  margin-top: 30px;
+  font-size: 2vw;
+  padding: 14px 32px;
+  border-radius: 30px;
+  border: 1px solid rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.3);
+  color: white;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 1s ease 0.6s;
+  animation: jump 1s infinite alternate;
+  pointer-events: auto;
+}
+
+@keyframes jump {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-12px); }
+}
+
+.animate-in {
+  opacity: 1;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  z-index: 20;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+
+.nav ul { display: flex; gap: 20px; list-style: none; }
+.nav a, .glass-btn { text-decoration: none; color: white; border-radius: 25px; }
+.glass-btn { backdrop-filter: blur(10px); background: rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.6); padding: 10px 20px; cursor: pointer; transition: all 0.3s ease; }
+.glass-btn:hover { transform: scale(1.05); background: rgba(255,255,255,0.5); }
+
+
+.glass-input {
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.4);
+  border: 1px solid rgba(255,255,255,0.6);
+  padding: 10px 15px;
+  border-radius: 25px;
+  width: 200px;
+}
+/* Placeholder text */
+.glass-input::placeholder {
+  color: black; /* placeholder text */
+  opacity: 1;   /* ensure full color, some browsers use lower opacity by default */
+}
+
+.nav {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 1s ease, transform 1s ease;
+  z-index: 3;
+}
+
+.nav.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* BANNER CARD */
+.banner-card {
+  max-width: 900px;           /* bigger than before */
+  background: rgba(255,255,255,0.5);
+  border-radius: 20px;
+  padding: 60px 50px;         /* more padding */
+  margin: 60px auto 0 auto;   /* a bit more space from top */
+  text-align: center;
+  z-index: 5;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+}
+
+/* Banner text sizes */
+.banner-card h1 {
+  font-size: 4rem;            /* much bigger title */
+  margin-bottom: 20px;
+}
+
+.banner-card h2 {
+  font-size: 2rem;            /* bigger subtitle */
+  margin-bottom: 30px;
+}
+
+/* Banner links bigger too */
+.banner-links a {
+  padding: 15px 30px;          /* bigger buttons */
+  font-size: 1.2rem;
+}
+
+/* HERO CARDS */
+.hero { display: flex; justify-content: center; padding: 80px 20px; }
+.hero-card {
+  position: relative;
+  display: flex;
+  gap: 50px;
+  padding: 40px;
+  border-radius: 20px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  max-width: 1200px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+}
+
+/* Hero 2: image left, text right */
+.hero-card:nth-child(2) {
+  flex-direction: row; /* image first, content second */
+}
+
+.hero-card:nth-child(even) {
+  flex-direction: row-reverse; /* other even cards */
+}
+
+
+/* Fade-in animation */
+.fade-in-card { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+.fade-in-card.visible { opacity: 1; transform: translateY(0); }
+
+/* Hero content & image */
+.hero-content { flex: 1; z-index: 3; position: relative; }
+.hero-img { width: 400px; object-fit: cover; cursor: pointer; border-radius: 15px; z-index: 5; position: relative;transition: transform 0.25s ease;
+}
+
+.hero-img:hover {
+    transform: scale(1.03);
+}
+
+/* GIF container behind text but above background */
+.gif-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.nyan-cat-gif, .rainbow-gif {
+  position: absolute;
+  top: 50%; 
+  transform: translateY(-50%);
+  width: 600px; 
+  opacity: 0.8;
+  z-index: 2;
+}
+
+/* READ MORE – SMOOTH DROPDOWN */
+.more-text {
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    height 0.45s ease,
+    opacity 0.35s ease,
+    transform 0.35s ease;
+  will-change: height, opacity, transform;
+}
+
+.more-text.open {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* FOOTER */
+footer { padding: 40px 60px; background: #f0f0f0; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px; position: relative; }
+.footer-logo { position: absolute; left: 60px; top: 40px; }
+.footer-logo img { height: 50px; object-fit: contain; }
+.footer-links { display: flex; gap: 30px; justify-content: center; }
+.footer-bottom { margin-top: 10px; }
+
+/* MODAL */
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; }
+.modal img { max-width: 90%; }
+
+/* BUTTON & LINK HOVER EFFECTS */
+.glass-btn,
+.nav a,
+.banner-links a,
+.footer-links a {
+  transition: all 0.3s ease;
+    color: black;
+
+}
+
+.glass-btn:hover,
+.nav a:hover,
+.banner-links a:hover,
+.footer-links a:hover {
+  transform: scale(1.05);          
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  background: rgba(255,255,255,0.6);
+  color: black;
+}
+.nav a:hover,
+.nav .glass-btn:hover,
+.hero-card .glass-btn:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.6);
+  color: black;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+.scratch-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 20px;
+}
+
+#scratchCanvas {
+  width: 1100px;       /* bigger width */
+  max-width: 100%;
+  height: 700px;       /* bigger height */
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+  cursor: pointer;
+}
+/* SECTIONS */
+.section { 
+  margin: 40px auto; 
+  width: 90%; 
+  max-width: 1200px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center the canvas inside the section */
+}
+
+/* Title aligned left inside the section */
+.section .title { 
+  align-self: flex-start; /* aligns the title to the left */
+  display: inline-block; 
+  padding: 10px 25px; 
+  font-size: 22px; 
+  font-weight: bold; 
+  backdrop-filter: blur(10px); /* glass effect */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25); /* shadow */
+  background: rgba(255,255,255,0.3); /* translucent glass */
+  color: black;
+  border: 2px solid rgba(255,255,255,0.6); 
+  border-radius: 12px; 
+  margin-bottom: 25px; 
+}
+
+/* BACK TO TOP BUTTON */
+#backToTop {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: none; /* hidden by default */
+  padding: 12px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 25px;
+  background: rgba(255,255,255,0.6); /* glass translucent */
+  color: black;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+#backToTop:hover {
+  transform: scale(1.1);
+  background: rgba(255,255,255,0.8);
+}
+
+
+#musicToggle {
+  position: fixed;
+  bottom: 25px;
+  left: 25px; /* changed from right to left */
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  font-size: 22px;
+  cursor: pointer;
+
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  border: none;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  z-index: 9999;
+}
+
+#musicToggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.35);
+}
+/* =========================
+   HERO IMAGE LIGHTBOX
+========================= */
+
+.hero-img {
+  cursor: pointer;
+}
+
+/* Dark overlay */
+.hero-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 99999;
+}
+
+/* Active state */
+.hero-lightbox.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Image itself */
+.hero-lightbox img {
+  max-width: 90%;
+  max-height: 85%;
+  border-radius: 16px;
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* Fade-in image */
+.hero-lightbox.active img {
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+
+.hero-card.water-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.wave-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.waves {
+  position: absolute;
+  bottom: -100%; /* start hidden below */
+  width: 100%;
+  height: 40%;   /* final visible height */
+  min-height: 150px;
+  transition: bottom 3s ease-out; /* rising animation */
+}
+
+.parallax > use {
+  animation: move-forever 10s cubic-bezier(.55,.5,.45,.5) infinite;
+}
+
+.parallax > use:nth-child(1) { animation-delay: -2s; animation-duration: 7s; }
+.parallax > use:nth-child(2) { animation-delay: -3s; animation-duration: 10s; }
+.parallax > use:nth-child(3) { animation-delay: -4s; animation-duration: 13s; }
+
+@keyframes move-forever {
+  0% { transform: translate3d(-90px,0,0); }
+  100% { transform: translate3d(85px,0,0); }
+}
+/* WATER BASE */
+.water-base {
+  position: absolute;
+  bottom: -180%;           /* start hidden below */
+  left: 0;
+  width: 120%;            /* full width of card */
+  height: 80%;            /* taller than before */
+  background: url('assets/images/water.png') center/cover no-repeat;
+  z-index: 1;             /* behind waves */
+  transition: bottom 3s ease-out;
+  opacity: 0.9;        /* 50% translucent */
+}
+
+/* Custom cursor for hero 3 */
+.hero-card.water-hero {
+  cursor: none; /* hide default cursor */
+  position: relative; /* ensure cursor is positioned relative to hero */
+}
+
+.custom-cursor {
+  width: 24px; /* normal cursor size */
+  height: 24px;
+  background: url('assets/images/FrutigerAeroCursor.png') no-repeat center/contain;
+  position: fixed; /* follow viewport */
+  pointer-events: none; /* don't block clicks */
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  display: none; /* initially hidden */
+}
+
+/* hide native cursor for hero 3 and all its children */
+.hero-card.water-hero.hide-native-cursor,
+.hero-card.water-hero.hide-native-cursor * {
+  cursor: none !important;
+}
+
+
+.slides {
+  display: flex;
+  width: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+
+
+.hero-slider .hero-card {
+  flex: 0 0 100%;   /* EXACTLY one slide wide */
+  max-width: 100%;
+  box-sizing: border-box;
+  
+}
+.hero-slider {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  
+}
+
+/* THIS is the important one */
+.hero-slider .slider {
+  position: relative;
+  overflow: hidden;   /* ← hides off-screen heroes */
+  width: 100%;
+}
+
+/* SLIDER ARROWS */
+.hero-slider .prev,
+.hero-slider .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  font-size: 40px;
+  color: rgb(0, 0, 0);
+
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  z-index: 9999;
+  opacity: 1;
+}
+
+/* LEFT */
+.hero-slider .prev {
+  left: 30px;
+}
+
+/* RIGHT */
+.hero-slider .next {
+  right: 30px;
+}
+
+/* Hover effect */
+.hero-slider .prev:hover,
+.hero-slider .next:hover {
+  color: #7fdcff;
+}
+
+.hero > .hero-card {
+  min-height: 520px;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.hero > .hero-card .hero-content {
+  max-width: 550px;
+  flex-direction: column;
+  height: 100%; /* vult de hoogte van de hero */
+}
+
+
+.hero > .hero-card .hero-img {
+  width: 450px;     /* iets groter dan 400px */
+  height: auto;
+  object-fit: cover; /* behoudt verhouding */
+  border-radius: 15px;
+}
+
+
+.hero > .hero-card .hero-content h3 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.hero > .hero-card .hero-content p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.hero > .hero-card .glass-btn {
+  padding: 15px 30px;
+  font-size: 1rem;
+}

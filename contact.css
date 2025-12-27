@@ -1,0 +1,165 @@
+
+
+/* CONTACT PAGE BASE */
+body.contact-page {
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #1e1e36, #0f2d5c); /* gradient background */
+  color: #fff;
+}
+
+/* CONTACT SECTION */
+.contact-section {
+  margin: 100px auto;
+  justify-content: center;
+  width: 90%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+/* TITLE (GLASS EFFECT) */
+.contact-page .title {
+  align-self: flex-start;
+  font-size: 48px;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(15px);
+  border-radius: 25px;
+  padding: 25px 45px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* CONTACT CARD */
+.contact-wrapper {
+  width: 100%;
+  max-width: 600px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(25px);
+  padding: 50px;
+  border-radius: 30px;
+  box-shadow: 0 15px 60px rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* FORM */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.contact-form label {
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 18px;
+  border-radius: 15px;
+  border: none;
+  font-size: 16px;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  backdrop-filter: blur(10px);
+  transition: 0.3s ease;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: 2px solid rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.2);
+}
+
+/* BUTTON */
+.contact-btn {
+  padding: 16px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 700;
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  backdrop-filter: blur(12px);
+  transition: 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+  background: rgba(255,255,255,0.3);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .contact-page .title {
+    font-size: 36px;
+    padding: 18px 30px;
+  }
+
+  .contact-wrapper {
+    padding: 30px;
+  }
+}
+/* ==========================
+   CONTACT PAGE NAV FIX
+   ========================== */
+
+.contact-page .nav {
+  position: static !important;
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+  visibility: visible !important;
+
+  background: transparent;
+  padding: 20px 60px;
+  
+    display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  z-index: 20;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+
+}
+
+/* Zorg dat knoppen zichtbaar zijn */
+.contact-page .nav a,
+.contact-page .nav input {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+  visibility: visible !important;
+}
+
+/* UL en LI resetten */
+.contact-page .nav ul {
+  display: flex;
+  gap: 20px;
+}
+
+.contact-page .nav li {
+  list-style: none;
+}

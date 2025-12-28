@@ -51,7 +51,7 @@ body { margin: 0; font-family: Inter, sans-serif; background: white; color: blac
 }
 
 .hero-title {
-  color: rgb(170,170,170);
+  color: white;
 }
 
 .hero-subtitle {
@@ -585,3 +585,4 @@ footer { padding: 40px 60px; background: #f0f0f0; text-align: center; display: f
   padding: 15px 30px;
   font-size: 1rem;
 }
+
